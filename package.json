@@ -1,0 +1,24 @@
+{
+  "name": "seed",
+  "version": "0.1.0",
+  "description": "A server provisionning tool",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christophe Maillot <christophe.maillot@gmail.com> (https://chrm.fr/)",
+  "license": "ISC",
+  "bin": {
+    "seed": "./index.js"
+  },
+  "dependencies": {
+    "app-module-path": "^2.2.0",
+    "async": "^2.6.0",
+    "clone": "^2.1.1",
+    "colors": "^1.1.2",
+    "commander": "^2.12.2",
+    "scp2": "^0.5.0",
+    "ssh2": "^0.5.5",
+    "traceback": "^0.3.1"
+  }
+}
