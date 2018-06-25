@@ -68,6 +68,35 @@ exports.execute_via_ssh = function (username, host, command) {
     })
 }
 
+exports.capture_via_ssh = function (username, host, command) {
+    return new Promise(function(fullfill, reject) {
+        var conn = new SSHClient();
+
+        var stdout = ""
+        var stderr = ""
+        
+        conn.on('ready', function() {
+            conn.exec(command, function(err, stream) {
+                if (err) 
+                    reject(err)
+                stream.on('close', function(code, signal) {
+                    fullfill({out:stdout, err:stderr, host:host})
+                }).on('data', function(data) {  
+                    stdout = stdout + data
+                }).stderr.on('data', function(data) {
+                    stderr = stderr + data
+                });
+            });
+        }).connect({
+            host: host,
+            username: username,
+            port: 22,
+            agent: process.env.SSH_AUTH_SOCK
+        });    
+    })
+}
+
+
 exports.scp_put_string_ssh = function(username, host, content, destination) {
     return new Promise(function(fullfill, reject) {
         var buffer = Buffer.from(content, 'utf8')

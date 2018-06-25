@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const program = require('commander');
+const program = require('commander')
 
 program
     .version('0.1.0')
@@ -21,6 +21,7 @@ if (program.file.startsWith("/")) {
 if (fs.existsSync(fullpath)) {
 
     require('app-module-path').addPath(__dirname)
+    require('app-module-path').addPath(__dirname + '/node_modules')
 
     var module = require(fullpath)
 
